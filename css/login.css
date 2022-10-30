@@ -1,0 +1,111 @@
+body {
+    background-color: #ddd;
+}
+.card1{
+    display: flex;
+    justify-content: right;
+}
+.form {
+    width: 500px !important;
+}
+.form2 {
+    width: 600px !important;
+}
+
+h1 {
+    font-weight: 800 !important;
+    color: #0b3558;
+}
+input{
+    border: solid 1px #eee;
+}
+.msg {
+    letter-spacing: 2px;
+}
+button, .button{
+    background: #128119 !important;
+}
+button:hover{
+    background: #0a420d !important;
+}
+.fa-solid {
+    margin-right: -30px;
+    color: #0a420d;
+}
+
+.login_email {
+    margin-left: 20px !important;
+}
+
+.title {
+    color: #17ad21;
+}
+
+::placeholder {
+    margin-top: 20px !important;
+}
+input {
+    padding: 10px 40px;
+    caret-color: #0b3558;
+    color: #0b3558;
+    outline:none;
+    background: none;
+}
+#login_error{
+    color:red;
+}
+.heading{
+    color: #0a420d;
+}
+@media screen and (max-width:650px) {
+    .logo {
+        margin-left: 40px;
+    }
+
+    .heading {
+        margin-left: 45px !important;
+        font-size: 45px;
+    }
+
+    .form {
+        margin-left: -40px !important;
+        width: 400px !important;
+
+    }
+    .form2 {
+        margin-left: -40px !important;
+        width: 400px !important;
+    }
+
+
+}
+
+@media screen and (max-width:768px) {
+    .user{
+        margin-left:30px;
+    }
+    body {
+        overflow: hidden !;
+    }
+    button{
+        margin-left: 10vw !important;
+    }
+    
+}
+
+@media screen and (min-width:1024px) {
+    .card2 {
+        margin-top: -50px !important;
+        margin-left: -30px !important;
+        width: 35vw;
+    }
+}
+
+@media screen and (max-width:1280px) {
+    .card2 {
+        margin-left: 4vw !important;
+        width: 40vw;
+    }
+
+
+}

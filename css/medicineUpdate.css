@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500&display=swap');
+* {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+body {
+    background-color: #bdbdbd;
+}
+thead td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+td,input {
+    background-color: rgb(243 244 246);
+    height: 50px !important;
+    font-size: small;
+}
+.table td {
+    border: 0ch;
+    width: 30%;
+}
+.label {
+    width: 12% !important;
+}
+input,select{
+    border: 1px solid #bdbdbd;
+    width: 80% !important;
+    height: 30px !important;
+    padding-left: 10px !important;
+}
+textarea {
+    border: 1px solid #bdbdbd !important;
+    width: 80% !important;
+    height: 30px;
+    padding-left: 10px !important;
+}
+.submit {
+    background-color: #19ac19;
+    color: white;
+    width: 80px;
+    height: 30px;
+    font-size: medium;
+    border-radius: 3px;
+    margin-left: 87%;
+}
+.submit:hover {
+    background-color: #0f7a0f;
+}
+input[type=radio] {
+    border: 0px;
+    width: 10% !important;
+    transform: scale(0.5);
+}
+.img{
+    border: 1px solid #bdbdbd !important;
+    height: 190px !important;
+    padding: 12px;
+}
+.img input{
+    border: 0px solid white !important;
+}
+.img img {
+    width: 60px;
+}
