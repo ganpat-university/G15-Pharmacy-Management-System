@@ -27,48 +27,40 @@
                 <a href="medicine.php">
                     <div class="innercard bg-white h-40 rounded-md shadow-2xl p-4 text-blue-600">
                             <div class="img">
-                                <img src="img/medicine.png" alt="medicine" class="icon w-16 h-16">
+                                <img src="img/medicine2.png" alt="medicine" class="icon w-16 h-16">
                             </div>
                             <div>
                                 <p class="cat font-semibold">VIEW MEDICINE</p>
                             </div>
                     </div>
                 </a>
-                <a href="#">
+                <a href="medicineUpdate.php">
                     <div class="innercard bg-white h-40 rounded-md shadow-2xl p-4 text-blue-600">
                         <div class="img">
-                            <img src="img/icons/add.png" alt="medicine" class="icon h-16">
+                            <img src="img/icons/add2.png" alt="medicine" class="icon h-16">
                         </div>
                         <div>
                             <p class="cat font-semibold">ADD MEDICINE</p>
                         </div>
                     </div>
                 </a>
-            </div>
-        </div>
-<!--  -->
-        <div class="category">
-            <div class="border-yellow-900 mx-4 headborder">
-                <p class="px-8 py-3 mt-14 text-white text-3xl bg-yellow-500 w-2/6 head">Category</p>
-            </div>
-            <div class="card p-16 pt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-14">
-                <a href="#">
-                    <div class="innercard bg-white h-40 rounded-md shadow-2xl p-4 text-yellow-600">
+                <a href="medicineUpdate.php">
+                    <div class="innercard bg-white h-40 rounded-md shadow-2xl p-4 text-blue-600">
                         <div class="img">
-                            <img src="img/category.png" alt="category" class="icon h-16">
+                            <img src="img/expired.png" alt="medicine" class="icon h-16">
                         </div>
                         <div>
-                            <p class="cat font-semibold">VIEW CATEGORY</p>
+                            <p class="cat font-semibold">Expired Medicine</p>
                         </div>
                     </div>
                 </a>
-                <a href="#">
-                    <div class="innercard bg-white h-40 rounded-md shadow-2xl p-4 text-yellow-600">
+                <a href="medicineUpdate.php">
+                    <div class="innercard bg-white h-40 rounded-md shadow-2xl p-4 text-blue-600">
                         <div class="img">
-                            <img src="img/category.png" alt="category" class="icon h-16">
+                            <img src="img/icons/add.png" alt="medicine" class="icon h-16">
                         </div>
                         <div>
-                            <p class="cat font-semibold">ADD CATEGORY</p>
+                            <p class="cat font-semibold">Out Of Stock</p>
                         </div>
                     </div>
                 </a>
@@ -106,6 +98,7 @@
     <div class="footer">
         <p class="text-center text-white text-lg py-4">© 2021 Pharmacy Management System</p>
     </div>
+    <?php include 'mail.php'; ?>
 </div>
 </body>
 </html>

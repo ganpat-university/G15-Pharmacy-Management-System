@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500&display=swap');
+   
+* {
+    font-family: 'Poppins', sans-serif !important;
+}
+body {
+    background-color: #bdbdbd;
+}
+.mail:hover{
+    width: 60px !important;
+    height: 60px !important;
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+  
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

@@ -9,194 +9,88 @@
     <title>Pharmacy Management System</title>
     <link rel="stylesheet" type="text/css" href="css/flowbite.min.css">
     <script src="js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/purchase.css">
 </head>
 <body>
 <?php include 'header.php';?>
 <?php include 'navbar.php';?>
 <div class="container mx-auto pt-24">
     <div class="cardform w-full justify-center bg-gray-100 p-6 shadow-xl shadow-gray-900 rounded">
-        <div class="col1 mb-4 py-2 pl-4 border-b-2 text-xl border-gray-500">
-            Request To Purchase
+        <div class="row grid mb-4 pl-4 border-b-2 border-gray-500">
+            <div class="col1 text-2xl font-medium">
+                Purchase List
+            </div>
+            <div class="col2 flex justify-self-end text-white font-medium -mt-6 p-1">
+                <button class="p-1 px-2 rounded" style="background-color: #01b301;"> <a href="purchaseRequest.php" class="flex"><img src="img/icons/addWhite.png" alt="request" class="w-6 mr-2">Request For Purchase</a> </button>
+            </div>
         </div>
         <div class="container">
-            <table class="w-11/12 mx-auto table">
-                <tr>
-                    <td class="label">Supplier Name</td>
-                        <td><input type="text" name="medicineID" value="Healthcare  Pharmacy pvt Lmt" class="text-gray-400 bg-gray-100 border-1 border-gray-300" disabled></td>
-                    <td class="label">Date</td>
-                        <td><input type="date" name="medicineID" value=""></td>
-                </tr>
-                <tr>
-                    <td class="label">Invoice Number</td>
-                        <td><input type="text" name="medicineID" value="" placeholder="Invoice No"></td>
-                    <td class="label">Details</td>
-                        <td><textarea name="medicineID" value="" placeholder="Details" class="p-1"></textarea></td>
-                </tr>
-                <tr>
-                    <td class="label">Payment Type</td>
-                        <td>
-                            <select name="banck" value="" class="paymentMode p-2">
-                                <option value="Cash">Cash Payment</option>
-                                <option value="Credit">Bank Payment</option>
-                            </select>
-                        </td>
-                    <td class="label bank" style="display: none;">Bank</td>
-                        <td style="display: none;">
-                            <select name="bank" value="Select Bank" class="p-2">
-                                <option value="Select Bank">Select Bank</option>
-                                <option value="Axis Bank Ltd">Axis Bank Ltd</option>
-                                <option value="Bank Of Baroda">Bank Of Baroda</option>
-                                <option value="Bank Of India">Bank Of India</option>
-                                <option value="Bank Of Maharastra">Bank Of Maharastra</option>
-                                <option value="Canara Bank">Canara Bank</option>
-                                <option value="Central Bank Of India">Central Bank Of India</option>
-                                <option value="ICICI Bank Ltd">ICICI Bank Ltd</option>
-                                <option value="Indian Bank">Indian Bank</option>
-                                <option value="Indian Overseas Bank">Indian Overseas Bank</option>
-                                <option value="HDFC Bank Ltd">HDFC Bank Ltd</option>
-                                <option value="Punjab National Bank">Punjab National Bank</option>
-                                <option value="State Bank Of India">State Bank Of India</option>
-                                <option value="Union Bank Of India">Union Bank Of India</option>
-                                <option value="United Bank Of India">United Bank Of India</option>
-                                <option value="Yes Bank Ltd">Yes Bank Ltd</option>
-                            </select>
-                        </td>
-                </tr>
-            </table>
-            <table class="medicineInformation w-full mt-6">
-                <thead>
-                    <tr>
-                        <td>Sr No</td>
-                        <td class="w-3/12">Medicine Information</td>
-                        <td>Stock Qty</td>
-                        <td>Box Qty</td>
-                        <td>Supplier Price</td>
-                        <td>Total Purchase Price</td>
-                        <td>Action</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><input list="medicine">
-                            <datalist id="medicine">
-                                <option value="aaa">
-                                <option value="bbb">
-                                <option value="abc">
-                                <option value="cbd">
-                                <option value="bcd">
-                                <option value="aaa">
-                                <option value="bbb">
-                                <option value="abc">
-                                <option value="cbd">
-                                <option value="bcd">
-                                <option value="aaa">
-                                <option value="bbb">
-                                <option value="abc">
-                                <option value="cbd">
-                                <option value="bcd">
-                                <option value="aaa">
-                                <option value="bbb">
-                                <option value="abc">
-                                <option value="cbd">
-                                <option value="bcd">
-                                <option value="aaa">
-                                <option value="bbb">
-                                <option value="abc">
-                                <option value="cbd">
-                                <option value="bcd">
-                                <option value="aaa">
-                                <option value="bbb">
-                                <option value="abc">
-                                <option value="cbd">
-                                <option value="bcd">
-                            </datalist>
-                        </td>
-                        <td><p class="bg-gray-300 p-1">124</p></td>
-                        <td><input type="number"></td>
-                        <td><p class="bg-gray-300 p-1">200</p></td>
-                        <td class="flex">
-                            <div class="col1 w-11/12">
-                                <p class="totalPurchase p-1 bg-gray-300">1,230</p>
-                            </div>
-                            <div class="col2">Rs</div>
-                        </td>
-                        <td><img src="img/icons/delete.png" alt="delete" id="delete" class="w-8 bg-red-100 border-2 border-red-500 hover:bg-red-200 mx-auto"></td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="5" class="compField">Sub Total</td>
-                        <td class="flex">
-                            <div class="col1 w-11/12">
-                                <p class="totalPurchase p-1 bg-gray-300">1,230</p>
-                            </div>
-                            <div class="col2">Rs</div>
-                        </td>
-                        <td><img src="img/icons/add2.png" alt="add" id="add" class="w-8 p-1 bg-blue-200 mx-auto border-2 border-blue-500 hover:bg-blue-300"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="5" class="compField">Discount</td>
-                        <td class="flex">
-                            <div class="col1 w-11/12">
-                                <input type="text" placeholder="0.00">
-                            </div>
-                            <div class="col2 pl-2">%</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="5" class="compField">Grand Total</td>
-                        <td class="flex">
-                            <div class="col1 w-11/12">
-                                <p class="totalPurchase p-1 bg-gray-300">1,230</p>
-                            </div>
-                            <div class="col2">Rs</div>
-                        </td>
-                    </tr>
-            </table>
-            <div class="w-full pr-4 mt-6 flex justify-end gap-2">
-                <button class="btn">Cancel</button>
-                <button class="submit">Submit</button>
+            <div class="table pb-10  w-full">
+                <table class="display" width="100%" id="tableList">
+                    <thead>
+                        <tr>
+                            <th class="w-14">Sr No</th>
+                            <th>Invoice No</th>
+                            <th>Products</th>
+                            <th>Date</th>
+                            <th>Box Qty</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td class=""><p class="text-red-600 font-semibold">Pending</p></td>
+                            <td>
+                                <img src="img/icons/eye.png" alt="Details" class="bg-green-100 hover:bg-green-200 p-1 w-8 border-2 border-gray-400">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td class=""><p class="text-blue-600 font-semibold">Accepted</p></td>
+                            <td>
+                                <img src="img/icons/eye.png" alt="Details" class="bg-green-100 hover:bg-green-200 p-1 w-8 border-2 border-gray-400">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td class=""><p class="font-semibold" style="color: #0A0;">Delivered</p></td>
+                            <td>
+                                <img src="img/icons/eye.png" alt="Details" class="bg-green-100 hover:bg-green-200 p-1 w-8 border-2 border-gray-400">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+    <?php include 'mail.php'; ?>
 </div>
 </body>
 <script>
-    $(document).on("click","#add",function(){
-        let a=$($(this).parent()).parent();
-        $("<tr>"+
-                        "<td>1</td>"+
-                        "<td><input type='text'></td>"+
-                        "<td><p class='bg-gray-300 p-1'>124</p></td>"+
-                        "<td><input type='number'></td>"+
-                        "<td><p class='bg-gray-300 p-1'>200</p></td>"+
-                        "<td class='flex'>"+
-                            "<div class='col1 w-11/12'>"+
-                                "<p class='totalPurchase p-1 bg-gray-300'>1,230</p>"+
-                            "</div>"+
-                            "<div class='col2'>Rs</div>"+
-                        "</td>"+
-                        "<td><img src='img/icons/delete.png' alt='delete' id='delete' class='w-8 bg-red-100 border-2 border-red-500 hover:bg-red-200 mx-auto'></td>"+
-                    "</tr>").insertBefore(a);
-    });
-    $(document).on("click","#delete",function(){
-        let a=$($(this).parent()).parent();
-        console.log(a);
-        $(a).remove();
-   });
-   $(document).on("change",".paymentMode",function(){
-         let a=$($(this).parent()).parent();
-         console.log(a);
-         if($(a).find(".paymentMode").val()=="Credit"){
-              $(a).find(".bank").show();
-              $(a).find(".bank").next().show();
-         }
-         else{
-              $(a).find(".bank").hide();
-              $(a).find(".bank").next().hide();
-         }
-    });
+    $(document).ready(function() {
+        $('#tableList').DataTable( {
+            "pagingType": "full_numbers"
+        } );
+        $("select").css({'height':"35px",'width':"55px","padding-left":"5px","margin-bottom":"30px"});       
+        $("#tableList_filter input").css('height',"35px");  
+        $("th").css({"font-weight":"400"});
+} );
 </script>
 </html>

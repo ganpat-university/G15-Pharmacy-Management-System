@@ -33,19 +33,10 @@ body {
     background-image: url("../img/bg-illustrate.png");
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: azure;
-    box-shadow: 7px 7px 25px rgb(138, 138, 138);
+    background-color: #f0ffff;
+    box-shadow: 7px 7px 25px #8a8a8a;
 }
-.illustrate{
-    margin-left: 120%;
-}
-.descrip {
-    padding-bottom: 100px;
-    padding-top: 100px;
-    padding-left: 50px;
-    margin-top: -300px;
-    text-shadow: 3px 3px 5px white;
-}
+
 a:hover {
     font-weight: bold;
 }

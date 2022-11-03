@@ -17,14 +17,14 @@
     <div class="row py-16 pt-32">
         <div class="col max-w-auto px-16 mt-8">
             <div class="headcard p-6 rounded-md">
-                <div class="card-body">
+                <div class="card-body p-2">
                     <div>
-                        <img src="img/icons/folder.png" alt="folder" class="folder -mt-24">
+                        <img src="img/icons/folder.png" alt="folder" class="folder mx-0 -mt-24">
                         <p class="ml-24 -mt-16 mb-8 text-2xl text-green-700"><b class="font-medium text-3xl">C</b>ustomizable <b class="font-medium text-3xl">P</b>harmacy <b class="font-medium text-3xl">W</b>orkflow</p>
                     </div>
-                    <div class="w-3/6">
-                        <img src="img/Illustration.png" class="illustrate w-96">
-                        <p class="descrip text-xl">PMS is a comprehensive, flexible pharmacy workflow solution that organizes and stores all the documents and media that keep your pharmacy running smoothly.</p>
+                    <div class="grid grid-cols-2 w-full">
+                        <p class="descrip text-lg w-full h-3/6 my-auto">PMS is a comprehensive, flexible pharmacy workflow solution that organizes and stores all the documents and media that keep your pharmacy running smoothly.</p>
+                        <img src="img/Illustration.png" class="illustrate w-3/6 justify-self-end">
                     </div>
                 </div>
             </div>
@@ -80,6 +80,8 @@
             </div>
         </div>
     </div>
+
+    <?php include 'mail.php'; ?>
 </div>
 
 
