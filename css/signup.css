@@ -18,13 +18,14 @@ body{
 }
 
 input{
-    border-bottom: 1px solid rgb(66, 66, 66);
+    border-bottom: 0px solid rgb(66, 66, 66);
     border-radius: 10px !important;
     width: 90% !important;
     height: 3vw !important;
     background-color:  rgb(197, 197, 197);
     letter-spacing: 2px;
     text-align: center;
+    outline: none;
 }
 
 input:hover{
