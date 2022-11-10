@@ -1,3 +1,4 @@
+<?php include 'session.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,10 +14,45 @@
 </head>
 <body>
 <!-- Header included -->
-<?php include 'header.php';?>
-<?php include 'navbar.php';?>
-<?php include 'db/db.php';?>
-<?php include 'function/function.php';?>
+<?php include 'header.php';
+include 'navbar.php';
+include 'db/db.php';
+include 'function/function.php';
+
+    $managerId = $_SESSION['pharmacyid'];
+    $sql = "SELECT * FROM product;";
+    $result = sql($sql);
+    if (isset($_POST['submit'])) {
+        $date = get('date');
+        $invoiceNumber = get('invoiceNumber');
+        $details = get('details');
+        $paymentType = get('payment');
+        $bank = get('bank');
+        $rowCnt = get('rowCnt');
+        $total = get('grandTotal');
+        $subTotal = get('subTotal');
+        $discount = get('discount');
+        $status = "Pending";
+        for ($x = 0; $x < $rowCnt; $x++) {
+            $medicineName = $_POST['medicineName'][$x];
+            $category = $_POST['category'][$x];
+            $Quantity = $_POST['stockNo'][$x];
+            $price = sql("SELECT * FROM product WHERE medicineName = '$medicineName';")[0]['supplierCost'];
+            $price = floatval($price);
+            $totalPrice = $price * $Quantity;
+            insert("purchase",array("invoiceNo","managerId","requestDate","details","paymentType","bankName","status","medicineName","Qty","category","totalAmount"),array($invoiceNumber,$managerId,$date,$details,$paymentType,$bank,$status,$medicineName,$Quantity,$category,$totalPrice));
+            insert("mail",array("sender","receiver","body","dateOfmail"),array("admin","$managerId","Purchase Request : Invoice Number : $invoiceNumber",$date));
+        }
+    ?>
+        <div class="invalidmsg z-20 mt-10 flex justify-center w-full fixed">
+                <div class="row p-2 w-96 text-center bg-green-500 shadow-xl shadow-gray-900 rounded-lg">
+                    <p class="font-medium text-white">Purchase Request</p>
+                    <p class="font-medium text-white">Sent to Admin successfully.</p>
+                </div>
+        </div>
+    <?php
+    }
+    ?>
 <!-- Header included -->
 
 <div class="container mx-auto pt-24">
@@ -25,23 +61,25 @@
             Request To Purchase
         </div>
         <div class="container">
+            <form method="POST">
+                <input type="text" value="0" name="rowCnt" class="rowCnt hidden">
             <table class="w-11/12 mx-auto table">
                 <tr>
                     <td class="label">Supplier Name</td>
-                        <td><input type="text" name="medicineID" value="Healthcare  Pharmacy pvt Ltd" class="text-gray-400 bg-gray-100 border-1 border-gray-300" disabled></td>
+                        <td><input type="text" name="supplierName" value="Healthcare  Pharmacy pvt Ltd" class="text-gray-400 bg-gray-100 border-1 border-gray-300" disabled></td>
                     <td class="label">Date</td>
-                        <td><input type="date" name="medicineID" value=""></td>
+                        <td><input type="date" name="date" value=""></td>
                 </tr>
                 <tr>
                     <td class="label">Invoice Number</td>
-                        <td><input type="text" name="medicineID" value="" placeholder="Invoice No"></td>
+                        <td><input type="text" name="invoiceNumber" value="" placeholder="Invoice No" required></td>
                     <td class="label">Details</td>
-                        <td><textarea name="medicineID" value="" placeholder="Details" class="p-1"></textarea></td>
+                        <td><textarea name="details" value="" placeholder="Details" class="p-1"></textarea></td>
                 </tr>
                 <tr>
                     <td class="label">Payment Type</td>
                         <td>
-                            <select name="banck" value="" class="paymentMode p-2">
+                            <select name="payment" value="" class="paymentMode p-2" required>
                                 <option value="Cash">Cash Payment</option>
                                 <option value="Credit">Bank Payment</option>
                             </select>
@@ -72,10 +110,9 @@
             <table class="medicineInformation w-full mt-6">
                 <thead>
                     <tr>
-                        <td>Sr No</td>
                         <td class="w-3/12">Medicine Information</td>
                         <td>Stock Qty</td>
-                        <td>Box Qty</td>
+                        <td>Category</td>
                         <td>Supplier Price</td>
                         <td>Total Purchase Price</td>
                         <td>Action</td>
@@ -83,24 +120,33 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td><input list="medicine">
+                        <td><input list="medicine" name="medicineName[]" class="med0" id="med" required>
                             <datalist id="medicine" >
                                 <?php
-                                    $sql = "SELECT * FROM product;";
-                                    $result = sql($sql);
                                     foreach ($result as $row) {
                                         echo "<option value='".$row['medicineName']."'>";
                                     }
                                 ?>
                             </datalist>
                         </td>
-                        <td><p class="bg-gray-300 p-1">124</p></td>
-                        <td><input type="number"></td>
-                        <td><p class="bg-gray-300 p-1">200</p></td>
+                        <td><input type="number" name="stockNo[]" min="1" value="1" id="stockQty" required></td>
+                        <td>
+                            <select name="category[]" id="category" class="bg-gray-100 h-full p-1" required>
+                                <option value="Tablet">Tablet</option>
+                                <option value="Capsule">Capsule</option>
+                                <option value="Syrup">Syrup</option>
+                                <option value="Injection">Injection</option>
+                                <option value="Cream">Cream</option>
+                                <option value="Gel">Gel</option>
+                                <option value="Drop" class="Drop">Drop</option>
+                                <option value="Powder">Powder</option>
+                                <option value="Antibiotic Eyedrops">Antibiotic Eyedrops</option>
+                            </select>
+                        </td>
+                        <td><p class="supplierPrice[] bg-gray-300 p-1" id="supplierPrice">0.00</p></td>
                         <td class="flex">
                             <div class="col1 w-11/12">
-                                <p class="totalPurchase p-1 bg-gray-300">1,230</p>
+                                <p class="totalPurchase[] p-1 bg-gray-300" id="totalPurchase">0.00</p>
                             </div>
                             <div class="col2">Rs</div>
                         </td>
@@ -109,17 +155,18 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="5" class="compField">Sub Total</td>
+                        <td colspan="4" class="compField">Sub Total</td>
                         <td class="flex">
                             <div class="col1 w-11/12">
-                                <p class="totalPurchase p-1 bg-gray-300">1,230</p>
+                                <p class="subTotal p-1 bg-gray-300" id="subTotal">0</p>
+                                <input type="text" name="subTotal" class="hidden">
                             </div>
                             <div class="col2">Rs</div>
                         </td>
                         <td><img src="img/icons/add2.png" alt="add" id="add" class="w-8 p-1 bg-blue-200 mx-auto border-2 border-blue-500 hover:bg-blue-300"></td>
                     </tr>
                     <tr>
-                        <td colspan="5" class="compField">Discount</td>
+                        <td colspan="4" class="compField">Discount</td>
                         <td class="flex">
                             <div class="col1 w-11/12">
                                 <input type="text" placeholder="0.00">
@@ -128,10 +175,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="5" class="compField">Grand Total</td>
+                        <td colspan="4" class="compField">Grand Total</td>
                         <td class="flex">
                             <div class="col1 w-11/12">
-                                <p class="totalPurchase p-1 bg-gray-300">1,230</p>
+                                <p class="grandTotal p-1 bg-gray-300" id="grandTotal">000</p>
+                                <input type="text" name="grandTotal" class="hidden">
                             </div>
                             <div class="col2">Rs</div>
                         </td>
@@ -139,38 +187,55 @@
             </table>
             <div class="w-full pr-4 mt-6 flex justify-end gap-2">
                 <button class="btn"><a href="purchase.php" >Cancel</a></button>
-                <button class="submit">Submit</button>
+                <input type="submit" name="submit" class="submit">
             </div>
+            </form>
         </div>
     </div>
 </div>
 </body>
 <script>
+    let cnt = 1,cnt1=1;
+    $(".rowCnt").val(cnt);
     $(document).on("click","#add",function(){
         let a=$($(this).parent()).parent();
-        $("<tr>"+
-                        "<td>1</td>"+
-                        "<td><input type='text'></td>"+
-                        "<td><p class='bg-gray-300 p-1'>124</p></td>"+
-                        "<td><input type='number'></td>"+
-                        "<td><p class='bg-gray-300 p-1'>200</p></td>"+
-                        "<td class='flex'>"+
-                            "<div class='col1 w-11/12'>"+
-                                "<p class='totalPurchase p-1 bg-gray-300'>1,230</p>"+
-                            "</div>"+
-                            "<div class='col2'>Rs</div>"+
-                        "</td>"+
-                        "<td><img src='img/icons/delete.png' alt='delete' id='delete' class='w-8 bg-red-100 border-2 border-red-500 hover:bg-red-200 mx-auto'></td>"+
-                    "</tr>").insertBefore(a);
+        $('<tr>'+
+                        '<td><input list="medicine" class="med'+cnt1+'" name="medicineName[]" id="med" required>'+
+                            '<datalist id="medicine" >'+ "<?php foreach ($result as $row) {echo "<option value='".$row['medicineName']."'>";}?>"+
+                            '</datalist>'+
+                        '</td>'+
+                        '<td><input type="number" name="stockNo[]" min="1" value="1" id="stockQty" required></td>'+
+                        '<td>'+
+                            '<select name="category[]" id="category" class="bg-gray-100 h-full p-1" required>'+
+                                '<option value="Tablet">Tablet</option><option value="Capsule">Capsule</option><option value="Syrup">Syrup</option><option value="Injection">Injection</option><option value="Cream">Cream</option><option value="Gel">Gel</option><option value="Drop" class="Drop">Drop</option><option value="Powder">Powder</option><option value="Antibiotic Eyedrops">Antibiotic Eyedrops</option>'+
+                            '</select>'+
+                        '</td>'+
+                        '<td><p class="supplierPrice[] bg-gray-300 p-1" id="supplierPrice">0.00</p></td>'+
+                        '<td class="flex">'+
+                            '<div class="col1 w-11/12">'+
+                                '<p class="totalPurchase[] p-1 bg-gray-300" id="totalPurchase">0</p>'+
+                            '</div>'+
+                            '<div class="col2">Rs</div>'+
+                        '</td>'+
+                        '<td><img src="img/icons/delete.png" alt="delete" id="delete" class="w-8 bg-red-100 border-2 border-red-500 hover:bg-red-200 mx-auto"></td>'+
+                    '</tr>').insertBefore(a);
+            cnt = cnt + 1;
+            cnt1 = cnt1 + 1;
+            $(".rowCnt").val(cnt);
     });
     $(document).on("click","#delete",function(){
         let a=$($(this).parent()).parent();
-        console.log(a);
-        $(a).remove();
+        let subTotal = $("#subTotal").text();
+        let totalPurchase = $(this).parent().prev().children().text();
+        let newSubTotal = parseFloat(subTotal) - parseFloat(totalPurchase);
+        $("#subTotal").text((Number(newSubTotal).toFixed(2)));
+        $("#grandTotal").text((Number(newSubTotal).toFixed(2)));
+        a.remove();
+        cnt = cnt - 1;
+        $(".rowCnt").val(cnt);
    });
    $(document).on("change",".paymentMode",function(){
          let a=$($(this).parent()).parent();
-         console.log(a);
          if($(a).find(".paymentMode").val()=="Credit"){
               $(a).find(".bank").show();
               $(a).find(".bank").next().show();
@@ -180,6 +245,50 @@
               $(a).find(".bank").next().hide();
          }
     });    
+   $(document).on("change","#med",function(){
+    let a=$(this).attr("class"),b;
+    let med = $(this).val();
+    $.ajax({
+        url: "insertPurchase.php",
+        type: "POST",
+        data: {med: med},
+        success: function(data){
+            b=data;
+            let preSup = $("."+a).parent().next().next().next().next().find("#totalPurchase").text();
+            $("."+a).parent().next().next().next().find("#supplierPrice").text(data);
+            $("."+a).parent().next().next().next().next().find("#totalPurchase").text(data);
+            subTot=$("#subTotal").text();
+            sub = parseFloat(subTot) + parseFloat(b) - parseFloat(preSup);
+            $("#subTotal").text(Number((sub).toFixed(2)));
+            $("#grandTotal").text(Number((sub).toFixed(2)));
+        }
+    });
+   });
+   $(document).on("change","#stockQty",function(){
+        let supPri = $(this).parent().next().next().next().find("#totalPurchase").text();
+        let a=$(this).parent().next().next().find("#supplierPrice").text();
+        let b=$(this).val();
+        let c=a*b;
+        $(this).parent().next().next().next().find("#totalPurchase").text(c);
+        if ($("#subTotal").text() == 0) {
+            $("#subTotal").text(c);
+        } else {
+            let d = $("#subTotal").text();
+            let e = parseFloat(d)+ parseFloat(c) - parseFloat(supPri);
+            // console.log("pre"+supPri+" preSub"+d+" cur" + c + "e"+e);
+            if (d == Number((e).toFixed(2))){
+                e=e+parseFloat(supPri);
+            }
+            // console.log(Number((e).toFixed(2)));
+            $("#subTotal").text(Number((e).toFixed(2)));
+            $("#grandTotal").text(Number((e).toFixed(2)));
+        }
+    });
+
+$(document).on("click",".invalidmsg",function(){
+    $(this).remove();
+});
+
 </script>
 
 </html>

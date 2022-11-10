@@ -8,7 +8,7 @@ if ($file == "/g15-pharmacy-management-system/login.php" || $file == "/g15-pharm
         header("Location:home.php");
     }
 } else {
-    if (!isset($_SESSION['id'])) {
+    if (!isset($_SESSION['pharmacyid'])) {
         header("Location:login.php");
     }
 }

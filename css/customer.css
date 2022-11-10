@@ -38,3 +38,14 @@ input {
     background-color: blue !important;
     color: #FFF;
 }
+.bill input {
+    text-align: center !important;
+}
+.submit {
+    background-color: #00a51b !important;
+    color: #FFF;
+}
+.submit:hover {
+    background-color: #038618 !important;
+    color: #FFF;
+}

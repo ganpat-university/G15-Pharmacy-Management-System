@@ -1,3 +1,4 @@
+<?php include 'session.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,13 @@
 </head>
 <body>
 <?php include 'header.php';?>
-<?php include 'navbar.php';?>
+<?php include 'navbar.php';
+include 'db/db.php';
+include 'function/function.php';
+    $managerId = $_SESSION['pharmacyid'];
+    $sql="SELECT * FROM purchase where managerId = $managerId ORDER BY status ASC";
+    $result = sql($sql);
+?>
 <div class="container mx-auto pt-24">
     <div class="cardform w-full justify-center bg-gray-100 p-6 shadow-xl shadow-gray-900 rounded">
         <div class="row grid mb-4 pl-4 border-b-2 border-gray-500">
@@ -32,13 +39,40 @@
                             <th>Invoice No</th>
                             <th>Products</th>
                             <th>Date</th>
-                            <th>Box Qty</th>
+                            <th>Quantity</th>
                             <th>Total Amount</th>
                             <th>Status</th>
                             <th>Details</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
+                        <?php
+                            foreach($result as $key => $row){
+                                $purchaseId = $row['id'];
+                                $invoiceNo = $row['invoiceNo'];
+                                $date = $row['requestDate'];
+                                $status = $row['status'];
+                                $quantity = $row['Qty'];
+                                $totalAmount = $row['totalAmount'];
+                                $medicineName = $row['medicineName'];
+                                echo "<tr>";
+                                echo "<td>$purchaseId</td>";
+                                echo "<td>$invoiceNo</td>";
+                                echo "<td>$medicineName</td>";
+                                echo "<td>$date</td>";
+                                echo "<td>$quantity</td>";
+                                echo "<td>$totalAmount</td>";
+                                if($status == "Pending"){
+                                    echo "<td><span class='text-red-600 font-semibold'>Pending</span></td>";
+                                }else if($status == "Approved"){
+                                    echo "<td><span class='text-green-600 font-semibold'>Approved</span></td>";
+                                }else if($status == "Rejected"){
+                                    echo "<td><span class='text-yellow-600 font-semibold'>Rejected</span></td>";
+                                }
+                                echo "<td><a href='purchaseRequested.php?purchaseId=$purchaseId' class='text-blue-500'><img src='img/icons/eye.png' alt='Details' class='bg-green-100 hover:bg-green-200 p-1 w-8 border-2 border-gray-400'></a></td>";
+                                echo "</tr>";
+                            }
+                        ?>
                         <tr>
                             <td>1</td>
                             <td>2</td>
@@ -47,30 +81,6 @@
                             <td>5</td>
                             <td>6</td>
                             <td class=""><p class="text-red-600 font-semibold">Pending</p></td>
-                            <td>
-                                <img src="img/icons/eye.png" alt="Details" class="bg-green-100 hover:bg-green-200 p-1 w-8 border-2 border-gray-400">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td class=""><p class="text-blue-600 font-semibold">Accepted</p></td>
-                            <td>
-                                <img src="img/icons/eye.png" alt="Details" class="bg-green-100 hover:bg-green-200 p-1 w-8 border-2 border-gray-400">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td class=""><p class="font-semibold" style="color: #0A0;">Delivered</p></td>
                             <td>
                                 <img src="img/icons/eye.png" alt="Details" class="bg-green-100 hover:bg-green-200 p-1 w-8 border-2 border-gray-400">
                             </td>

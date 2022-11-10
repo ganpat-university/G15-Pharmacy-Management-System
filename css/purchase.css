@@ -59,21 +59,26 @@ option{
 .totalPurchase{
     width: 80% !important;
 }
-.submit {
-    padding: 5px;
-    width: 80px;
-    color: #FFF;
-    border-radius: 5px;
-    background-color: #01b301;
-}
 .btn {
     padding: 5px;
     width: 80px;
     border-radius: 5px;
     background-color: #bdbdbd;
 }
+.btn:hover {
+    background-color: #1313f8;
+    color: #fff;
+}
+.submit {
+    padding: 5px;
+    width: 80px !important;
+    color: #FFF;
+    border-radius: 5px;
+    background-color: #01b301;
+}
 tfoot .compField {
     text-align: end !important;
     padding-right: 10px !important;
     font-weight: 500 !important;
 }
+.invalidmsg { animation: fadeout 0.5s !important; }

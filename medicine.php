@@ -1,3 +1,8 @@
+<?php
+include 'session.php';
+include 'db/db.php';
+include 'function/function.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +16,10 @@
     <script src="js/jquery.dataTables.min.js"></script>
 </head>
 <body>
-<?php include 'header.php'; ?>
-<?php include 'navbar.php'; ?>
+<?php include 'header.php'; 
+    include 'navbar.php'; 
+    $managerId = $_SESSION['pharmacyid'];
+?>
 
 <div class="container mx-auto">
     <div class="menu max-w-auto border-b-4 border-blue-700 rounded-l-xl">
@@ -45,179 +52,35 @@
                 </thead>
                 <tbody>
                     <?php 
-                        $sql = "SELECT * FROM medicine;";
+                        $sql = "SELECT * FROM stockreport where managerId = '$managerId'";
                         $result = sql($sql);
                         $sr = 1;
                         foreach ($result as $row) {
+                            $medicineName = $row['productName'];
+                            $medicineData = "SELECT * FROM product where medicineName = '$medicineName'";
+                            $medicineResult = sql($medicineData);
+                            $genName = $medicineResult[0]['genericName'];
+                            $category = $medicineResult[0]['category'];
+                            $strength = $medicineResult[0]['strength'];
+                            $image = $medicineResult[0]['medicineImage'];
+                            if ($image == "") {
+                                $image = "img/medicine.png";
+                            } else {
+                                $image = "data:image/jpeg;base64,".base64_encode($image);
+                            }
                             echo "<tr>
                                     <td>".$sr."</td>
-                                    <td>".$row['medicine_name']."</td>
-                                    <td>".$row['generic_name']."</td>
-                                    <td>".$row['category']."</td>
-                                    <td>".$row['price']."</td>
-                                    <td>".$row['strength']."</td>
-                                    <td><img src='img/".$row['image']."' width='100px' height='100px'></td>
+                                    <td>".$medicineName."</td>
+                                    <td>".$genName."</td>
+                                    <td>".$category."</td>
+                                    <td>".$row['unitCost']."</td>
+                                    <td>".$strength."</td>
+                                    <td><img src='".$image."' class='w-14 h-14'></td>
                                     <td>".$row['quantity']."</td>
                                 </tr>";
                             $sr++;
                         }
                     ?>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td class="">
-                        <img src="img/medicine.png" class="w-14 h-14">
-                    </td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td class="">
-                        <img src="img/medicine.png" class="w-14 h-14">
-                    </td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td class="">
-                        <img src="img/medicine.png" class="w-14 h-14">
-                    </td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td class="">
-                        <img src="img/medicine.png" class="w-14 h-14">
-                    </td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td class="">
-                        <img src="img/medicine.png" class="w-14 h-14">
-                    </td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td class="">
-                        <img src="img/medicine.png" class="w-14 h-14">
-                    </td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td class="">
-                        <img src="img/medicine.png" class="w-14 h-14">
-                    </td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td class="">
-                        <img src="img/medicine.png" class="w-14 h-14">
-                    </td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td class="">
-                        <img src="img/medicine.png" class="w-14 h-14">
-                    </td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td class="">
-                        <img src="img/medicine.png" class="w-14 h-14">
-                    </td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td class="">
-                        <img src="img/medicine.png" class="w-14 h-14">
-                    </td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td class="">
-                        <img src="img/medicine.png" class="w-14 h-14">
-                    </td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td class="">
-                        <img src="img/medicine.png" class="w-14 h-14">
-                    </td>
-                    <td>8</td>
-                </tr>
                 </tbody>
             </table>
         </div>

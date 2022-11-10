@@ -1,3 +1,9 @@
+<?php
+include 'session.php';
+include 'db/db.php';
+include 'function/function.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +18,9 @@
 <body>
 <?php include 'header.php'; ?>
 <?php include 'navbar.php'; ?>
-
+<?php
+    $managerId = $_SESSION['pharmacyid'];
+?>
 <div class="container mx-auto">
     <div class="row py-16 pt-32">
         <div class="col max-w-auto px-16 mt-8">
@@ -39,7 +47,14 @@
                 </div>
                 <div>
                     <p class="font-semibold">TOTAL CUSTOMER</p>
-                    <p class="text-xl"><i>1,25,234</i></p>
+                    <p class="text-xl"><i>
+                    <?php
+                    $sql = "SELECT distinct(billId) FROM customer where managerId = $managerId";
+                    $result = sql($sql);
+                    $count = count($result);
+                    echo $count;
+                    ?>
+                    </i></p>
                     <hr class="pb-3">
                     <a href="customer.php" class="text-blue-500 text-xs"> <i>Show Details . . .</i></a>
                 </div>
@@ -50,7 +65,13 @@
                 </div>
                 <div>
                     <p class="font-semibold">TOTAL MEDICINE</p>
-                    <p class="text-xl"><i>125</i></p>
+                    <p class="text-xl"><i>
+                    <?php
+                    $sql = "SELECT * FROM stockreport where managerId = $managerId";
+                    $result = sql($sql);
+                    $count = count($result);
+                    echo $count;
+                    ?></i></p>
                     <hr class="pb-3">
                     <a href="customer.php" class="text-blue-500 text-xs"> <i>Show Details . . .</i></a>
                 </div>
@@ -61,7 +82,13 @@
                 </div>
                 <div>
                     <p class="font-semibold">OUT OF STOCK</p>
-                    <p class="text-xl"><i>25</i></p>
+                    <p class="text-xl"><i>
+                    <?php
+                    $sql = "SELECT * FROM stockreport where managerId = $managerId and quantity = 0";
+                    $result1 = sql($sql);
+                    $count = count($result1);
+                    echo $count;
+                    ?></i></p>
                     <hr class="pb-3">
                     <a href="customer.php" class="text-blue-500 text-xs"> <i>Show Details . . .</i></a>
                 </div>
@@ -72,7 +99,19 @@
                 </div>
                 <div>
                     <p class="font-semibold">EXPIRED MEDICINE</p>
-                    <p class="text-xl"><i>40</i></p>
+                    <p class="text-xl"><i>
+                    <?php
+                    foreach ($result as $row) {
+                        $expDate = $row['expDate'];
+                        $expDate = date('Y-m-d', strtotime($expDate));
+                        $today = date('Y-m-d');
+                        $count = 0;
+                        if ($expDate < $today) {
+                            $count++;
+                        }
+                    }
+                    echo $count;
+                    ?></i></p>
                     <hr class="pb-3">
                     <a href="customer.php" class="text-blue-500 text-xs"> <i>Show Details . . .</i></a>
                 </div>

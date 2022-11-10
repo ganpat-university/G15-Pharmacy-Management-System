@@ -35,7 +35,7 @@ textarea {
     padding-left: 10px !important;
 }
 input[type=radio] {
-    border: 0px;
+    border: 1px solid #000;
     width: 10% !important;
     transform: scale(0.5);
 }

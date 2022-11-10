@@ -58,7 +58,7 @@ include 'function/function.php';
                     <i class="fa-solid fa-envelope"></i>
                     <input class="w-96 rounded-lg shadow-xl border border-gray-400 h-16 pl-10" placeholder="Enter Your Email" name="email" type="text" required><br><br>
                     <i class="fa-solid fa-lock"></i>
-                    <input class="w-96 rounded-lg shadow-xl border border-gray-400 h-16 pl-10" placeholder="Enter Your Password" name="pwd" type="password" required><br><br>
+                    <input class="w-96 rounded-lg shadow-xl border border-gray-400 h-16 pl-10" placeholder="Enter Your Password" id="pwd" name="pwd" type="password" required><br><br>
                     <div class="log w-96">
                         <p id="button" class="button w-24 text-white p-3 pl-6 rounded-lg h-12">Log in</p>
                     </div>
@@ -66,7 +66,25 @@ include 'function/function.php';
                 </form>
 
                 <br><br>
-                <div class="text-base lg:-mt-4 lg:-ml-4"><p class="ml-5">Don't have an account? <a href="signup.php" class="text-blue-700">Sign Up</a></p>
+                <div class="text-base flex lg:-mt-4 lg:-ml-4">
+                    <div class="">
+                        <input type="checkbox" name="chpwd" id="chpwd" value="" onclick="myFunction()"/>
+                        <label for="chpwd">
+                            Show Password
+                            <script>
+                            function myFunction() {
+                                var x = document.getElementById("pwd");
+                                if (x.type === "password") {
+                                    x.type = "text";
+                                } else {
+                                    x.type = "password";
+                                }
+                            }
+                            </script>
+                        </label>
+                    </div>
+                
+                    <p class="ml-5">Don't have an account? <a href="signup.php" class="text-blue-700">Sign Up</a></p>
                 </div>
                 </p>
             </div>

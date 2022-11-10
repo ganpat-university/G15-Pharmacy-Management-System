@@ -40,7 +40,7 @@
                             <img src="img/icons/add2.png" alt="medicine" class="icon h-16">
                         </div>
                         <div>
-                            <p class="cat font-semibold">ADD MEDICINE</p>
+                            <p class="cat font-semibold">Edit MEDICINE</p>
                         </div>
                     </div>
                 </a>
