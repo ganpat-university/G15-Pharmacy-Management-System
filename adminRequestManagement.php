@@ -113,12 +113,15 @@ include 'function/function.php';
 
     $('.accept').click(function() {
         var id = $(this).closest('tr').find('td:eq(0)').text();
+        var action = 'accept';
+        var name = $(this).closest('tr').find('td:eq(3)').text();
         $.ajax({
             url: 'request.php',
             type: 'POST',
             data: {
                 id: id,
-                action: 'accept'
+                action: action,
+                name: name
             },
             success: function(data) {
                 location.reload();
@@ -127,12 +130,15 @@ include 'function/function.php';
     });
     $(".reject").click(function() {
         var id = $(this).closest('tr').find('td:eq(0)').text();
+        var action = 'reject';
+        var name = $(this).closest('tr').find('td:eq(3)').text();
         $.ajax({
             url: 'request.php',
             type: 'POST',
             data: {
                 id: id,
-                action: 'reject'
+                action: action,
+                name: name
             },
             success: function(data) {
                 location.reload();

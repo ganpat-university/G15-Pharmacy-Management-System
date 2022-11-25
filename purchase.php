@@ -73,18 +73,6 @@ include 'function/function.php';
                                 echo "</tr>";
                             }
                         ?>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td class=""><p class="text-red-600 font-semibold">Pending</p></td>
-                            <td>
-                                <img src="img/icons/eye.png" alt="Details" class="bg-green-100 hover:bg-green-200 p-1 w-8 border-2 border-gray-400">
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

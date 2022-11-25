@@ -37,7 +37,7 @@ include 'function/function.php';
         } else {?>
         <div class="invalidmsg flex justify-center w-full fixed">
                 <div class="row p-2 w-96 h-10 text-center bg-red-500 shadow-xl shadow-gray-900 rounded-lg">
-                            <p class="font-medium text-white">Invalid Credential !!!</p>
+                            <p class="font-medium text-white" id="invalid">Invalid Credential !!!</p>
                 </div>
         </div>
 <?php   
@@ -56,7 +56,7 @@ include 'function/function.php';
                 <form method="post">
                 <div class="user">
                     <i class="fa-solid fa-envelope"></i>
-                    <input class="w-96 rounded-lg shadow-xl border border-gray-400 h-16 pl-10" placeholder="Enter Your Email" name="email" type="text" required><br><br>
+                    <input class="w-96 rounded-lg shadow-xl border border-gray-400 h-16 pl-10" placeholder="Enter Your Email" id="email" name="email" type="text" required><br><br>
                     <i class="fa-solid fa-lock"></i>
                     <input class="w-96 rounded-lg shadow-xl border border-gray-400 h-16 pl-10" placeholder="Enter Your Password" id="pwd" name="pwd" type="password" required><br><br>
                     <div class="log w-96">
@@ -120,7 +120,7 @@ include 'function/function.php';
             $("input[name='email']").css("border", "2px solid green");
             pwd = $("input[name='pwd']").val();
             if (RegExp.test(pwd)) { 
-                $(".log").append("<button type='submit' class='w-24 text-white rounded-lg h-12'>Log in</button>"); 
+                $(".log").append("<button type='submit' id='buttonSub' class='w-24 text-white rounded-lg h-12'>Log in</button>"); 
                 $("#button").attr("hidden", true);
 
             }
@@ -137,7 +137,7 @@ include 'function/function.php';
         if (RegExp.test(pwd)) { 
             $(this).css("border", "2px solid green");
             if (isEmail(email) && temp == 0) {
-                $(".log").append("<button type='submit' class='w-24 text-white rounded-lg h-12'>Log in</button>");
+                $(".log").append("<button type='submit' id='buttonSub' class='w-24 text-white rounded-lg h-12'>Log in</button>");
                 $("#button").attr("hidden", true);
                 temp = 1;
             }
